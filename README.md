@@ -2,6 +2,8 @@
 
 ![Фото платы](https://github.com/atsidaev/4116_dram_tester/blob/master/doc/board.jpg)
 
+For English description scroll below.
+
 Минималистичный тестер динамической памяти 4116 для быстрой проверка чипов без сложной сборки. Без реле, защитных резисторов и кнопок управления. Сборка навесным монтажом, питание +12 В и −5 В — от недорогих DC-DC модулей. Разводка позволяет подключать выводы 2–6 панельки напрямую к отверстиям платы Arduino.
 
 Поддерживаются два варианта отображения: LCD-экран или вывод в последовательный порт. При отсутствии экрана можно ориентироваться по встроенным светодиодам: постоянное свечение — чип исправен, серия из пяти коротких вспышек — ошибка.
@@ -12,10 +14,29 @@
 
 ![Схема](https://github.com/atsidaev/4116_dram_tester/blob/master/doc/schematics.png)
 
+## Комплектующие
+
+| Имя | Название | Примерная цена | Рандомная ссылка на Aliexpress |
+|-----|----------|----------------|--------------------------------|
+| A1 | LGT8F328P TYPE-C Arduino Nano3 Clone | $1.5 |  https://aliexpress.ru/item/1005009016874090.html |
+| U1 | DIP-16 socket | $0.1 | |
+| U2 | MT3608 DC-DC Adjustable Boost Module 2A | $0.4 | https://aliexpress.ru/item/1005010413039458.html |
+| U3 | DC-DC Negative Voltage Power Supply Module -5V | $1 | https://aliexpress.ru/item/32902764735.html | 
+| J1 | OLED module 0.91" 128X32 | $1 | https://aliexpress.ru/item/1005004572487969.html |
+
+Сокет U1 можно взять ZIF-16. Ардуина должна подойти любая на AtMega328. U2 стоит настраиваемый только потому, что у меня был лишь такой под рукой. 
+Проще взять на фиксированное напряжение 12V, типа такого: https://aliexpress.ru/item/1005007581823204.html.
+
 ## Прошивка
 
 Используйте Arduino или PlatformIO для сборки прошивки и загрузки её в плату Arduino. 
 Основной скетч-файл это firmware/firmware.ino.
+
+При сборке через platformio все зависимости подтянутся сами, при сборке через Arduino IDE нужно 
+добавить библиотеку [Adafruit SSD1306](https://docs.arduino.cc/libraries/adafruit-ssd1306/).
+У неё есть две свои зависимости - Adafruit_GFX_Library и Adafruit_BusIO.
+
+Важно! Если тоже будете использовать плату на LGT8F328, то потребуется установить пакет "lgt8fx boards" и выбрать в меню Clock Source "External 16 MHz".
 
 ## Использование
 
@@ -43,9 +64,31 @@ Originally based on [4116TesterMod](https://github.com/Wierzbowsky/4116TesterMod
 
 Aimed at quick chip verification without elaborate assembly or enclosure.
 
+## Schematic
+
+See above
+
+## Bill of materials
+
+| Ref | Name | Approx. price | Random Aliexpress link |
+|-----|------|---------------|------------------------|
+| A1 | LGT8F328P TYPE-C Arduino Nano3 Clone | $1.5 |  https://aliexpress.ru/item/1005009016874090.html |
+| U1 | DIP-16 socket | $0.1 | |
+| U2 | MT3608 DC-DC Adjustable Boost Module 2A | $0.4 | https://aliexpress.ru/item/1005010413039458.html |
+| U3 | DC-DC Negative Voltage Power Supply Module -5V | $1 | https://aliexpress.ru/item/32902764735.html | 
+| J1 | OLED module 0.91" 128X32 | $1 | https://aliexpress.ru/item/1005004572487969.html |
+
+Socket U1 can be a ZIF-16 type. Any Arduino based on ATmega328 should work. U2 is adjustable only because that is what I had on hand.
+It is simpler to use a fixed 12 V module like this one: https://aliexpress.ru/item/1005007581823204.html.
+
 ## Flashing
 
 Use Arduino or PlatformIO to build and flash firmware. Main sketch file is firmware/firmware.ino.
+
+When building with PlatformIO all dependencies will be pulled in automatically. When using Arduino IDE you need to install the [Adafruit SSD1306](https://docs.arduino.cc/libraries/adafruit-ssd1306/) library.
+It has two dependencies of its own: Adafruit_GFX_Library and Adafruit_BusIO.
+
+If you are using an LGT8F328-based board, install the "lgt8fx boards" package and set "Clock Source" to "External 16 MHz" in the board menu.
 
 ## Usage
 
